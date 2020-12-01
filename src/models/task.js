@@ -12,6 +12,18 @@ const Task = mongoose.model('Task', {
     completed: {
         type: Boolean,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        required: true
+    },
+    dueDate: {
+        type: Date,
+        required: true
+    },
+    priority: {
+        type: String,
+        required: true
     }
 })
 
