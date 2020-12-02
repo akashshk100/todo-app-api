@@ -16,14 +16,10 @@ const userSchema = new mongoose.Schema({
 })
 
 userSchema.methods.generateAuthToken = async function(_id){
-    const token = jwt.sign({_id}, 'bacha.code')
-    const user = await User.findById({_id})
-    const newTokens = [...user.tokens]
-    newTokens.concat({token})
-    user.updateOne({
-        tokens: newTokens
-    })
-    console.log(token)
+    user = this
+    const token = jwt.sign({_id: user._id.toString()}, 'bacha.code')
+    user.tokens = user.tokens.concat({token})
+    user.save()
     return token
 }
 
